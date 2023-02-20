@@ -1,0 +1,6 @@
+  debug {
+            storePassword 'vibras22'
+            keyAlias 'key0'
+            keyPassword 'vibras22'
+            storeFile file('C:\\Users\\pc\\Desktop\\Vibras_new\\vibrasjks.jks')
+        }

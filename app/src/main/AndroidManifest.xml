@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.my.vibras">
+
+    <application
+        android:name=".VideoCalling.AppController"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.VIBRAS"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="32">
+        <activity
+            android:name=".act.BlockUsersAct"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".act.EventsDetailsScreenJoin"
+            android:exported="false" />
+        <activity
+            android:name=".ChooseLanguage"
+            android:exported="false" />
+        <activity
+            android:name=".act.AccAct"
+            android:exported="false" />
+        <activity
+            android:name=".AccomdDetailAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.HelpContactActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".act.SearchLocationMapAct"
+            android:exported="false" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="false"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="@string/fb_login_protocol_scheme"
+                    tools:ignore="ManifestResource" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".act.LikeSentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".act.LikeReceivedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".act.ForgetPasswordAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.FriendProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.GroupChat.GroupChatInnerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AudioCalling.CallWaitingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AudioCalling.VoiceChatViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VideoCalling.VideoCallingAct"
+            android:exported="false" />
+        <activity
+            android:name=".VideoCalling.IncomingCallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ChatInnerMessagesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".act.AboutUsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".act.AboutUsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.PrivacyPolicyAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ViewAllGroupsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.HelpAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ViewAllCategoryAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.GetEventsByCategoryIdAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ui.GroupDetailAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.GroupChatAct"
+            android:exported="false" />
+        <activity
+            android:name=".CreateGroupAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.GoodVibesAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.SearchConversationUserAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ViewAllEventAct"
+            android:exported="false" />
+        <activity
+            android:name=".SearchRestAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.RestaurantAct"
+            android:exported="false" />
+        <activity
+            android:name=".SearchEventAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.SavedEventsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.SavedRestaurantAct"
+            android:exported="false" />
+        <activity
+            android:name=".RestaurantDetailAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.StoryDetailAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.AddCommentAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.CreatePostAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.AddRestaurantCommentAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.AddEventCommentAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ChangePassAct"
+            android:exported="false" />
+        <activity
+            android:name=".Company.ComapmnySettingAct"
+            android:exported="false" />
+        <activity
+            android:name=".Company.HomeComapnyAct"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.NotificationScreenAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.AddPaymentCard"
+            android:exported="false" />
+        <activity
+            android:name=".act.SubsCriptionAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.PaymentsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.TermsCondition"
+            android:exported="false" />
+        <activity
+            android:name=".act.TransactionAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.EditProfileAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.PostCommentAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.AllCommentsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.EventsDetailsScreen"
+            android:exported="false" />
+        <activity
+            android:name=".act.SettingAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ChatDetailsScreen"
+            android:exported="false" />
+        <activity
+            android:name=".act.FriendListAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.FilterAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.SearchAct"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LikeInterestsAct"
+            android:exported="false" />
+        <activity
+            android:name=".VerificationAct"
+            android:exported="false" />
+        <activity
+            android:name=".TakeSelfieAct"
+            android:exported="false" />
+        <activity
+            android:name=".CompleteSignUpAct"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpAct"
+            android:exported="false" />
+        <activity
+            android:name=".LoginAct"
+            android:exported="false" />
+        <activity
+            android:name=".SelectViberLoginAct"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".act.HomeUserAct"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="false" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/api_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <receiver
+            android:name=".VideoCalling.CallNotificationActionReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="999">
+                <action android:name="ConstantApp.CALL_RECEIVE_ACTION" />
+                <action android:name="ConstantApp.CALL_CANCEL_ACTION" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".VideoCalling.HeadsUpNotificationService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.app.START_BACKGROUND" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".utility.VibrasNotification"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".VideoCalling.IncomingCallService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.app.START_BACKGROUND" />
+            </intent-filter>
+        </service>
+    </application>
+    <queries>
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
+    </queries>
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.    READ_GSERVICES" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="com.google.android.gms.permission.AD_ID"
+        tools:node="remove" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+</manifest>

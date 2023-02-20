@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "634353602769",
+    "firebase_url": "https://vibras-f3c99-default-rtdb.firebaseio.com",
+    "project_id": "vibras-f3c99",
+    "storage_bucket": "vibras-f3c99.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634353602769:android:2665e8b61c98c3e056b5f0",
+        "android_client_info": {
+          "package_name": "com.my.vibras"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634353602769-hjfcjgaf1knmtk84oi8l72cq8uvfr61i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.my.vibras",
+            "certificate_hash": "be053cf6e79e8a61ba7f5be6681e8978782d7b5e"
+          }
+        },
+        {
+          "client_id": "634353602769-b91u6m9cvrtjjp5nm7sl56dh4r8unv89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfafYXWLedHR9L2hdYg8hFQs_bz1LbDmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634353602769-b91u6m9cvrtjjp5nm7sl56dh4r8unv89.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "634353602769-2t60fm5a66qkhbk096ib5pkgc2u89dss.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ios.vibras"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

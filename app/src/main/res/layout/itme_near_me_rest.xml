@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_130sdp"
+    android:layout_height="@dimen/_130sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="@dimen/_3sdp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        >
+
+        <ImageView
+            android:layout_marginRight="-5dp"
+            android:layout_marginTop="-2dp"
+            android:layout_marginLeft="-5dp"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_65sdp"
+            android:id="@+id/ivRestaurant"
+            android:layout_gravity="center"
+            android:src="@drawable/resturant_img"
+            />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_gravity="center"
+            android:paddingLeft="5sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegan Resto"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+          />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_2sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 Mins"
+             android:maxLines="1"
+            android:drawableLeft="@drawable/icon_pin"
+android:drawablePadding="@dimen/_10sdp"
+            android:maxLength="24"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+          />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
