@@ -66,6 +66,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.retrofit.Constant.REGISTER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class LoginAct extends AppCompatActivity {
@@ -233,13 +234,15 @@ public class LoginAct extends AppCompatActivity {
             FirebaseMessaging.getInstance().getToken()
                     .addOnCompleteListener(task -> {
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "" + getString(R.string.fetching_fcm_token_failed), task.getException());
+                            Log.e(TAG, "" + getString(R.string.fetching_fcm_token_failed), task.getException());
                             return;
                         }
-                        // Get new FCM registration token
                         String token = task.getResult();
                         deviceToken = token;
                         SharedPreferenceUtility.getInstance(getApplication()).putString(Constant.REGISTER_ID, token);
+                        String firebasetoken = SharedPreferenceUtility.getInstance(getApplicationContext()).getString(REGISTER_ID);
+                        Log.w(TAG, "TOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKEN: "+firebasetoken );
+
                     });
         } catch (Exception e) {
             Toast.makeText(LoginAct.this, "Error=>" + e, Toast.LENGTH_SHORT).show();
@@ -284,6 +287,7 @@ public class LoginAct extends AppCompatActivity {
         String id = tz.getID();
         DataManager.getInstance().showProgressMessage(LoginAct.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
+        String firebasetoken = SharedPreferenceUtility.getInstance(getApplicationContext()).getString(REGISTER_ID);
 
         boolean val = SharedPreferenceUtility.getInstance(LoginAct.this)
                 .getBoolean(Constant.SELECTED_LANGUAGE);
@@ -296,7 +300,7 @@ public class LoginAct extends AppCompatActivity {
         map.put("lon", strLng);
         map.put("email", strEmail);
         map.put("password", strPassword);
-        map.put("register_id", deviceToken);
+        map.put("register_id", firebasetoken);
         map.put("time_zone", id);
         Call<SuccessResSignup> call = apiInterface.login(map);
         call.enqueue(new Callback<SuccessResSignup>() {
