@@ -130,7 +130,7 @@ public class SignUpAct extends AppCompatActivity {
                 {
                     long val = datePicker.getDate();
                     date=new Date(val);
-                    SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
                     String dateText = df2.format(date);
                     binding.tvDOb.setText(dateText);
                     strDob = dateText;
@@ -153,7 +153,7 @@ public class SignUpAct extends AppCompatActivity {
 
                 long val = date;
                 Date date1=new Date(val);
-                SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yy");
+                SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
                 String dateText = df2.format(date1);
                 binding.tvDOb.setText(dateText);
                 strDob = dateText;

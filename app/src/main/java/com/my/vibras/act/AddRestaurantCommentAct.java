@@ -14,6 +14,7 @@ import com.my.vibras.adapter.CommentRestaurantAdapter;
 import com.my.vibras.databinding.ActivityAddCommentBinding;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
@@ -146,7 +147,13 @@ public class AddRestaurantCommentAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(AddRestaurantCommentAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("restaurant_id",postId);
-
+        boolean val = SharedPreferenceUtility.getInstance(getApplicationContext())
+                .getBoolean(Constant.SELECTED_LANGUAGE);
+        if (!val) {
+            map.put("language", "en");
+        } else {
+            map.put("language", "sp");
+        }
         Call<SuccessResGetRestaurantComment> call = apiInterface.getRestaurantComments(map);
 
         call.enqueue(new Callback<SuccessResGetRestaurantComment>() {

@@ -1,6 +1,7 @@
 package com.my.vibras.adapter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.my.vibras.OnItemClickListener;
 import com.my.vibras.R;
 import com.my.vibras.model.SuccessResGetInterest;
 
@@ -28,9 +30,12 @@ public class PaymentCardRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 
     boolean isClick=false;
 
-    public PaymentCardRecyclerViewAdapter(Context context, ArrayList<SuccessResGetInterest.Result> modelList) {
+    public PaymentCardRecyclerViewAdapter(Context context,
+                                          ArrayList<SuccessResGetInterest.Result> modelList
+            ,OnItemClickListener mItemClickListener) {
         this.mContext = context;
         this.modelList = modelList;
+        this.mItemClickListener = mItemClickListener;
     }
 
     @Override
@@ -40,7 +45,7 @@ public class PaymentCardRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final SuccessResGetInterest.Result model = getItem(position);
@@ -112,11 +117,11 @@ public class PaymentCardRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
 //                        genericViewHolder.ivInterest.setColorFilter(ContextCompat.getColor(mContext, R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
 
                         genericViewHolder.ivInterest.setColorFilter(ContextCompat.getColor(mContext, R.color.white));
-
+                         mItemClickListener.onItemClick(view,position,model,"1");
 
                     }else
                     {
-
+                        mItemClickListener.onItemClick(view,position,model,"0");
                         final int sdk = android.os.Build.VERSION.SDK_INT;
                         if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                             genericViewHolder.cardView.setBackgroundDrawable(ContextCompat.getDrawable(mContext, R.drawable.gray_cornors_5) );
@@ -153,10 +158,6 @@ public class PaymentCardRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
     }
 
 
-    public interface OnItemClickListener {
-
-        void onItemClick(View view, int position, SuccessResGetInterest.Result model);
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -172,14 +173,14 @@ public class PaymentCardRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             cardView=itemView.findViewById(R.id.cardView);
             ivInterest = itemView.findViewById(R.id.ivInterest);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+           /* itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
+                //    mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
 
                 }
-            });
+            });*/
         }
     }
 

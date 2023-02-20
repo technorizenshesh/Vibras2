@@ -13,9 +13,11 @@ import com.google.gson.Gson;
 import com.my.vibras.databinding.ActivityCompleteSignUpBinding;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.SharedPreferenceUtility;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -34,7 +36,7 @@ public class CompleteSignUpAct extends AppCompatActivity {
     private String strEmail="",strPass="",strDob="",strFname="",strLname="",strGender="",strMobile="";
     public VibrasInterface apiInterface;
     String LoginType;
-    String[] gender = { "male", "female"};
+    String[] gender = null;
     ActivityCompleteSignUpBinding binding;
 
     @Override
@@ -42,6 +44,7 @@ public class CompleteSignUpAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_complete_sign_up);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+        gender = getResources().getStringArray(R.array.gender_list);
         strEmail = getIntent().getExtras().getString("email");
         strPass = getIntent().getExtras().getString("pass");
         strDob = getIntent().getExtras().getString("dob");
@@ -110,7 +113,14 @@ public class CompleteSignUpAct extends AppCompatActivity {
         map.put("password",strPass);
         map.put("dob",strDob);
         map.put("type",userTYpe);
-        map.put("gender",strGender);
+        if (strGender.equalsIgnoreCase("Hombre")){
+            map.put("gender", "Male");
+        }else  if (strGender.equalsIgnoreCase("Mujer")){
+            map.put("gender", "Female");
+        }else if (strGender.equalsIgnoreCase("Otro")){
+                map.put("gender", "Both");}
+            else {map.put("gender",strGender);}
+
         map.put("time_zone",id);
         Log.e("HashMapHashMap", "signup: "+map );
         Call<SuccessResSignup> signupCall = apiInterface.signup(map);

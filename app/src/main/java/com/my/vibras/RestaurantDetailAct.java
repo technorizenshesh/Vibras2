@@ -28,6 +28,7 @@ import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
@@ -169,6 +170,13 @@ e.printStackTrace();}
     private void getComment() {
         DataManager.getInstance().showProgressMessage(RestaurantDetailAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
+        boolean val = SharedPreferenceUtility.getInstance(getApplicationContext())
+                .getBoolean(Constant.SELECTED_LANGUAGE);
+        if (!val) {
+            map.put("language", "en");
+        } else {
+            map.put("language", "sp");
+        }
         map.put("restaurant_id",requestModel.getId());
         Call<SuccessResGetRestaurantComment> call = apiInterface.getRestaurantComments(map);
         call.enqueue(new Callback<SuccessResGetRestaurantComment>() {

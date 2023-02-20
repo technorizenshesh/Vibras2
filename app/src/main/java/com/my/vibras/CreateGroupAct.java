@@ -339,7 +339,6 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
                             if (options[item].equals(getString(R.string.take_photo))) {
                                 cameraClicked = true;
                                 if (checkPermisssionForReadStorage()) {
-
                                     openCamera();
                                 }
                             } else if (options[item].equals(getString(R.string.select_from_gallery))) {

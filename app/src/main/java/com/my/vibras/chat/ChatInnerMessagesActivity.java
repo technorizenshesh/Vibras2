@@ -893,6 +893,9 @@ String id;
             public void onFailure(Call<SuccessResMakeCall> call, Throwable t) {
 
                 call.cancel();
+                Log.e(TAG, "onFailure: "+t.getCause() );
+                Log.e(TAG, "onFailure: "+t.getMessage() );
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage() );
                 DataManager.getInstance().hideProgressMessage();
 
             }

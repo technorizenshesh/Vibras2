@@ -64,7 +64,8 @@ public class NEarmeAccAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.itemView.setOnClickListener(v ->
                     {
                         mContext.startActivity(new Intent(mContext, AccomdDetailAct.class)
-                                .putExtra("data",new Gson().toJson(modelList.get(position))));
+                                .putExtra("data",new Gson().toJson(modelList.get(position)))
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
             );
 

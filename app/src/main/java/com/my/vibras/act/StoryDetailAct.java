@@ -65,12 +65,43 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
     private TextView tvDateTime, tvSent;
     private EditText editText;
     private LinearLayout llContainer;
+    ImageView blockimage ;
     private VibrasInterface apiInterface;
+    private void spam_user(String story_id ) {
+        DataManager.getInstance().showProgressMessage(StoryDetailAct.this,
+                getString(R.string.please_wait));
+        String userId = SharedPreferenceUtility.getInstance(StoryDetailAct.this).getString(USER_ID);
+        Map<String, String> map = new HashMap<>();
+        map.put("story_id", story_id);
+        map.put("user_id", userId);
+        map.put("reason", "story spamed  by User");
+        Call<ResponseBody> call = apiInterface.spam_story(map);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    DataManager.getInstance().hideProgressMessage();
+                       Toast.makeText(getApplicationContext(), getResources().getString(R.string.msg_spamed), Toast.LENGTH_SHORT).show();
+                    finish();
+                } catch (Exception e) {
+                    Log.d("TAG", "onResponse: " + e);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                DataManager.getInstance().hideProgressMessage();
+                call.cancel();
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_detail);
+        blockimage = findViewById(R.id.blockimage);
         container = findViewById(R.id.container);
         llContainer = findViewById(R.id.llContainer);
         tvDateTime = findViewById(R.id.tvTimeAgo);
@@ -90,6 +121,9 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
                     Toast.makeText(StoryDetailAct.this, " Message Sent ..", Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+        blockimage.setOnClickListener(v -> {
+            spam_user(story_id);
         });
     }
 

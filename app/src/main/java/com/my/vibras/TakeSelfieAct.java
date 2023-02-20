@@ -1,5 +1,6 @@
 package com.my.vibras;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -64,10 +66,17 @@ public class TakeSelfieAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        binding= DataBindingUtil.setContentView(this,R.layout.activity_take_selfie);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+        try {
+
+
         if(getIntent()!=null)
         {
             LoginType=getIntent().getStringExtra("loginType").toString();
 
+        }
+        }catch (Exception e){
+            LoginType = "User";
+            e.printStackTrace();
         }
 
        binding.RNext.setOnClickListener(v -> {
@@ -86,14 +95,39 @@ public class TakeSelfieAct extends AppCompatActivity {
 
        });
 
-        binding.ivConverPhoto.setOnClickListener(v ->
+   /*     binding.ivConverPhoto.setOnClickListener(v ->
                 {
                     if(checkPermisssionForReadStorage())
                         openCamera();
 //                        showImageSelection();
                 }
+        );*/
+        binding.ivConverPhoto.setOnClickListener(v ->
+                {
+                    final CharSequence[] options = {getString(R.string.take_photo),getString( R.string.select_from_gallery), getString(R.string.cancel)};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TakeSelfieAct.this);
+                    builder.setTitle(getString(R.string.select_image));
+                    builder.setItems(options, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int item) {
+                            if (options[item].equals(getString(R.string.take_photo))) {
+                                if (checkPermisssionForReadStorage()) {
+                                    openCamera();
+                                }
+                            } else if (options[item].equals(getString(R.string.select_from_gallery))) {
+                                if (checkPermisssionForReadStorage()) {
+
+                                    getPhotoFromGallary();
+
+                                }
+                            } else if (options[item].equals(getString(R.string.cancel))) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    builder.show();
+                }
         );
-        
     }
 
     private void ApplyForVerify() {

@@ -33,6 +33,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.retrofit.Constant.LATItude;
+import static com.my.vibras.retrofit.Constant.LONGItude;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
@@ -83,8 +85,10 @@ public class ViewAllEventAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(ViewAllEventAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
-        map.put("lat","");
-        map.put("lon","");
+        String lat   = SharedPreferenceUtility.getInstance(ViewAllEventAct.this).getString(LATItude);
+        String lang = SharedPreferenceUtility.getInstance(ViewAllEventAct.this).getString(LONGItude);
+        map.put("lat", lat );
+        map.put("lon", lang);
         Call<SuccessResGetEvents> call = apiInterface.getEvents(map);
         call.enqueue(new Callback<SuccessResGetEvents>() {
             @Override

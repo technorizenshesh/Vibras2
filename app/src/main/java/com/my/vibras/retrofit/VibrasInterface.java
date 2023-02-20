@@ -13,6 +13,7 @@ import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResAddRestaurant;
 import com.my.vibras.model.SuccessResBlockedUser;
+import com.my.vibras.model.SuccessResCatType;
 import com.my.vibras.model.SuccessResDeleteCard;
 import com.my.vibras.model.SuccessResDeleteConversation;
 import com.my.vibras.model.SuccessResFilterData;
@@ -79,6 +80,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("signup")
     Call<SuccessResSignup> signup(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("check_otp")
     Call<SuccessResSignup> verifyOtp(@FieldMap Map<String, String> paramHashMap);
@@ -122,8 +124,14 @@ public interface VibrasInterface {
             @Part("first_login") RequestBody first_login,
             @Part MultipartBody.Part file);
 
-    @GET("getPassion")
-    Call<SuccessResGetInterest> getPassion();
+    @FormUrlEncoded
+    @POST("getPassion")
+    Call<SuccessResGetInterest> getPassion(
+            @FieldMap Map<String, String> paramHashMap);
+ @FormUrlEncoded
+    @POST("addPostInterest")
+    Call<ResponseBody> setPassion(
+            @FieldMap Map<String, String> paramHashMap);
 
     @GET("getUserStory")
     Call<SuccessResGetStories> getStories();
@@ -238,6 +246,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("delete_post")
     Call<SuccessResAddLike> deletePost(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("add_post_report")
     Call<ResponseBody> report_post(@FieldMap Map<String, String> paramHashMap);
@@ -367,6 +376,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("getUserEvents")
     Call<SuccessResMyEventRes> getMyEvents(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("getUseraccommodation")
     Call<SuccessResMyAccom> getUseraccommodation(@FieldMap Map<String, String> paramHashMap);
@@ -382,6 +392,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("addRestaurentlike")
     Call<SuccessResAddLike> addRestaurantLike(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("addaccommodationlike")
     Call<SuccessResAddLike> addaccommodationlike(@FieldMap Map<String, String> paramHashMap);
@@ -389,7 +400,8 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("delete_event")
     Call<SuccessResAddLike> deleteEvent(@FieldMap Map<String, String> paramHashMap);
-@FormUrlEncoded
+
+    @FormUrlEncoded
     @POST("delete_accommodation")
     Call<SuccessResAddLike> delete_accommodation(@FieldMap Map<String, String> paramHashMap);
 
@@ -404,6 +416,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("addRestaurentcomment")
     Call<ResponseBody> addRestaurantComment(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("addaccommodation_comment")
     Call<ResponseBody> addaccommodation_comment(@FieldMap Map<String, String> paramHashMap);
@@ -411,6 +424,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_restaurent_comment")
     Call<SuccessResGetRestaurantComment> getRestaurantComments(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("get_accommodation_comment")
     Call<AccomadListResSuccess> get_accommodation_comment(@FieldMap Map<String, String> paramHashMap);
@@ -549,6 +563,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_privacy_policy")
     Call<SuccessResGetPP> getPrivacyPolicy(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("get_cookies")
     Call<SuccessResGetPP> get_cookies(@FieldMap Map<String, String> paramHashMap);
@@ -596,6 +611,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("resend_otp")
     Call<SuccessResSignup> resend_otp(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("get_block_user")
     Call<SuccessResBlockedUser> get_block_user(@FieldMap Map<String, String> paramHashMap);
@@ -603,19 +619,25 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("logout")
     Call<ResponseBody> logout(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("add_story_reply")
     Call<ResponseBody> add_story_reply(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("change_language")
     Call<ResponseBody> change_language(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("block_user")
     Call<ResponseBody> block_user(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("spam_user")
     Call<ResponseBody> spam_user(@FieldMap Map<String, String> paramHashMap);
-
-   // https://myasp-app.com/vibras/webservice/logout?user_id=15
+    @FormUrlEncoded
+    @POST("spam_story")
+    Call<ResponseBody> spam_story(@FieldMap Map<String, String> paramHashMap);
+    // https://myasp-app.com/vibras/webservice/logout?user_id=15
     //https://myasp-app.com/vibras/webservice/resend_otp?email=tessdfgfgsy@gmail.com
 }

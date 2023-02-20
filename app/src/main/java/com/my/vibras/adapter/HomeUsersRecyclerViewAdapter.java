@@ -3,6 +3,7 @@ package com.my.vibras.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,17 +56,25 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         TextView txtName, tvDistance, tvOnlineStatus;
         ImageView ivFull, ivOtherLike, ivProfileLike, ivChat, send_msg, ivFire;
         CircleImageView smallImage;
-        ShimmerFrameLayout shimmer_view_container = holder.itemView.findViewById(R.id.shimmer_view_container);
         txtName = holder.itemView.findViewById(R.id.tvUserName);
         tvOnlineStatus = holder.itemView.findViewById(R.id.tvOnlineStatus);
         tvDistance = holder.itemView.findViewById(R.id.tvDistance);
         smallImage = holder.itemView.findViewById(R.id.icSmallProfile);
         ivFull = holder.itemView.findViewById(R.id.ivUser);
+        Log.e("TAG", "onBindViewHolder: modelList.get(position).getImage()---  "+modelList.get(position).getImage());
+        Log.e("TAG", "onBindViewHolder: modelList.get(position).getIdentify_image()---  "+modelList.get(position).getIdentify_image());
+        Glide.with(mContext)
+                .load(modelList.get(position).getImage())
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .error(Glide.with(mContext).load(modelList.get(position)
+                        .getIdentify_image()).error(R.color.gray1))
+                .placeholder(R.color.gray1)
+                .error(R.drawable.border_dark_gray)
+                .into(ivFull);
         ivOtherLike = holder.itemView.findViewById(R.id.ivOtherLike);
         ivProfileLike = holder.itemView.findViewById(R.id.ivLike);
         ivChat = holder.itemView.findViewById(R.id.ivChat);
         ivFire = holder.itemView.findViewById(R.id.ivFire);
-        shimmer_view_container.startShimmer();
         ivProfileLike.setOnClickListener(v ->
                 {
                     homeItemClickListener.addLikeToUser(position);
@@ -115,15 +124,7 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
                 }
         );
-        Glide.with(mContext)
-                .load(modelList.get(position).getImage())
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .error(
-                        Glide
-                                .with(mContext)
-                                .load(modelList.get(position).getIdentify_image())).placeholder(R.color.gray1)
-                .error(R.drawable.border_dark_gray)
-                .into(ivFull);
+
         Glide.with(mContext)
                 .load(modelList.get(position).getImage()).placeholder(R.color.gray1).error(R.drawable.border_dark_gray)
                 .into(smallImage);
@@ -157,7 +158,6 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
                 }
         );
-        shimmer_view_container.hideShimmer();
     }
 
     @Override

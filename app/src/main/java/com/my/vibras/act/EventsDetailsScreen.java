@@ -27,6 +27,7 @@ import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetEventComment;
 import com.my.vibras.model.SuccessResGetEvents;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
@@ -275,7 +276,13 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
         DataManager.getInstance().showProgressMessage(EventsDetailsScreen.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("event_id", requestModel.getId());
-
+        boolean val = SharedPreferenceUtility.getInstance(getApplicationContext())
+                .getBoolean(Constant.SELECTED_LANGUAGE);
+        if (!val) {
+            map.put("language", "en");
+        } else {
+            map.put("language", "sp");
+        }
         Call<SuccessResGetEventComment> call = apiInterface.getEventComments(map);
 
         call.enqueue(new Callback<SuccessResGetEventComment>() {

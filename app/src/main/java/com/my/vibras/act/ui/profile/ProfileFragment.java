@@ -107,7 +107,8 @@ public class ProfileFragment extends Fragment{
                 String cityName = addresses.get(0).getLocality();
                 String stateName = addresses.get(0).getAdminArea();
                 // txt_paddress.setText(address);
-                return  cityName+" , "+stateName;
+               // return  cityName+" , "+stateName;
+                return  cityName;
                 //   txt_state.setText(stateName);
 
             } catch (IOException e) {

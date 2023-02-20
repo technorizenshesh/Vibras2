@@ -69,7 +69,7 @@ public class FilterAct extends AppCompatActivity {
             "Vegetarian","Smoking","Family","Travel","Left-wing ideology","Right-wing ideology","Ideology of the centre"
     };
 
-    String[]Arraygender = null;
+    String[]Arraygender =null;
     String[] arrayAgeRange = new String[] {
             "10-25", "25-30","30-45","45-60"
     };
@@ -88,7 +88,7 @@ public class FilterAct extends AppCompatActivity {
          super.onCreate(savedInstanceState);
          binding= DataBindingUtil.setContentView(this,R.layout.activity_filter);
         Places.initialize(getApplicationContext().getApplicationContext(), getString(R.string.api_key));
-
+        Arraygender = getResources().getStringArray(R.array.gender_list);
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getApplicationContext());
          binding.RRback.setOnClickListener(v -> {
@@ -108,22 +108,6 @@ public class FilterAct extends AppCompatActivity {
 
          apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
-        boolean valye = SharedPreferenceUtility.getInstance(getApplicationContext()).getBoolean(
-                Constant.SELECTED_LANGUAGE);
-        if (!valye) {
-            Arraygender = new String[] {
-                    "Male",
-                    "Female",
-                    "Both",
-            };
-
-        } else {
-            Arraygender = new String[] {
-                    "Hombres",
-                    "Mujeres",
-                    "Ambos"
-            };
-        }
 
 
          binding.ivReset.setOnClickListener(v ->
@@ -264,15 +248,15 @@ public class FilterAct extends AppCompatActivity {
         /* "Masculina",
                     "Ambas",
                     ""*/
-      if (gender.equalsIgnoreCase("Masculina")){
+      if (gender.equalsIgnoreCase("Hombre")){
             map.put("gender", "Male");
 
-        }else  if (gender.equalsIgnoreCase("Femenina")){
+        }else  if (gender.equalsIgnoreCase("Mujer")){
             map.put("gender", "Female");
 
         }else {
 
-          if (gender.equalsIgnoreCase("Ambas")){
+          if (gender.equalsIgnoreCase("Otro")){
             map.put("gender", "Both");}else {
               map.put("gender", gender);
 

@@ -22,8 +22,10 @@ import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetEventComment;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,6 +106,13 @@ public class AllCommentsAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(AllCommentsAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("accommodation_id",postId);
+        boolean val = SharedPreferenceUtility.getInstance(getApplicationContext())
+                .getBoolean(Constant.SELECTED_LANGUAGE);
+        if (!val) {
+            map.put("language", "en");
+        } else {
+            map.put("language", "sp");
+        }
         Call<AccomadListResSuccess> call = apiInterface.get_accommodation_comment(map);
         call.enqueue(new Callback<AccomadListResSuccess>() {
             @Override
@@ -140,7 +149,13 @@ public class AllCommentsAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(AllCommentsAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("event_id",postId);
-
+        boolean val = SharedPreferenceUtility.getInstance(getApplicationContext())
+                .getBoolean(Constant.SELECTED_LANGUAGE);
+        if (!val) {
+            map.put("language", "en");
+        } else {
+            map.put("language", "sp");
+        }
         Call<SuccessResGetEventComment> call = apiInterface.getEventComments(map);
 
         call.enqueue(new Callback<SuccessResGetEventComment>() {
@@ -180,7 +195,13 @@ public class AllCommentsAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(AllCommentsAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("restaurant_id",postId);
-
+        boolean val = SharedPreferenceUtility.getInstance(getApplicationContext())
+                .getBoolean(Constant.SELECTED_LANGUAGE);
+        if (!val) {
+            map.put("language", "en");
+        } else {
+            map.put("language", "sp");
+        }
         Call<SuccessResGetRestaurantComment> call = apiInterface.getRestaurantComments(map);
 
         call.enqueue(new Callback<SuccessResGetRestaurantComment>() {

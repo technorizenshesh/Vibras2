@@ -66,6 +66,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.retrofit.Constant.LATItude;
+import static com.my.vibras.retrofit.Constant.LONGItude;
 import static com.my.vibras.retrofit.Constant.REGISTER_ID;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
@@ -241,6 +243,8 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
         String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
         Map<String, String> map = new HashMap<>();
         map.put("user_id", userId);
+        map.put("lat", strLat);
+        map.put("lon", strLng);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Call<SuccessResGetUsers> call = apiInterface.getAllUsers(map);
         call.enqueue(new Callback<SuccessResGetUsers>() {
@@ -251,7 +255,6 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
                     SuccessResGetUsers data = response.body();
                     Log.e("data", data.status);
                     if (data.status.equals("1")) {
-                        String dataResponse = new Gson().toJson(response.body());
                         usersList.clear();
                         usersList.addAll(data.getResult());
                         usersAdapters = new HomeUsersRecyclerViewAdapter(getActivity(),
@@ -263,7 +266,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
                         binding.rvhome.setAdapter(usersAdapters);
                        // binding.rvhome.hideShimmerAdapter();
                         binding.rvhome.setHasFixedSize(true);
-
+                        binding.nodata.setVisibility(View.GONE);
 
                         binding.rvhome.post(() -> {
                              try{
@@ -279,8 +282,12 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
                         });
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
+                        binding.nodata.setVisibility(View.VISIBLE);
+
                     }
                 } catch (Exception e) {
+                    binding.nodata.setVisibility(View.VISIBLE);
+
                     e.printStackTrace();
                 }
             }
@@ -288,6 +295,8 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
             @Override
             public void onFailure(Call<SuccessResGetUsers> call, Throwable t) {
                 call.cancel();
+                binding.nodata.setVisibility(View.VISIBLE);
+
                 DataManager.getInstance().hideProgressMessage();
             }
         });
@@ -321,6 +330,8 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
         map.put("user_id", userId);
         map.put("lat", strLat);
         map.put("lon", strLng);
+        SharedPreferenceUtility.getInstance(getActivity()).putString(LATItude,strLat);
+        SharedPreferenceUtility.getInstance(getActivity()).putString(LONGItude,strLng);
         Call<SuccessResDeleteConversation> call = apiInterface.updateLocation(map);
         call.enqueue(new Callback<SuccessResDeleteConversation>() {
             @Override

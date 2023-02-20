@@ -72,8 +72,8 @@ public class FriendProfileActivity extends AppCompatActivity {
                 getString(R.string.please_wait));
         String userId = SharedPreferenceUtility.getInstance(FriendProfileActivity.this).getString(USER_ID);
         Map<String, String> map = new HashMap<>();
-        map.put("frnd_id", userId);
-        map.put("user_id", User_id);
+        map.put("frnd_id", User_id);
+        map.put("user_id",userId );
         map.put("reason", "Block by User");
 
         Call<ResponseBody> call = apiInterface.block_user(map);
@@ -114,8 +114,8 @@ public class FriendProfileActivity extends AppCompatActivity {
                 getString(R.string.please_wait));
         String userId = SharedPreferenceUtility.getInstance(FriendProfileActivity.this).getString(USER_ID);
         Map<String, String> map = new HashMap<>();
-        map.put("frnd_id", userId);
-        map.put("user_id", User_id);
+        map.put("frnd_id", User_id);
+        map.put("user_id", userId );
         map.put("reason", "Spamed by User");
 
         Call<ResponseBody> call = apiInterface.spam_user(map);
@@ -494,7 +494,8 @@ public class FriendProfileActivity extends AppCompatActivity {
                 String cityName = addresses.get(0).getLocality();
                 String stateName = addresses.get(0).getAdminArea();
                 // txt_paddress.setText(address);
-                return cityName + " , " + stateName;
+               // return cityName + " , " + stateName;
+                return cityName ;
                 //   txt_state.setText(stateName);
 
             } catch (IOException e) {

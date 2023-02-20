@@ -16,6 +16,7 @@ import com.my.vibras.act.ChangePassAct;
 import com.my.vibras.act.HelpContactActivity;
 import com.my.vibras.act.NotificationScreenAct;
 import com.my.vibras.act.PrivacyPolicyAct;
+import com.my.vibras.act.SavedAccommodationAct;
 import com.my.vibras.act.SavedEventsAct;
 import com.my.vibras.act.SavedRestaurantAct;
 import com.my.vibras.act.SettingAct;
@@ -98,6 +99,9 @@ public class ComapmnySettingAct extends AppCompatActivity {
 
         binding.rlEvents.setOnClickListener(v -> {
             startActivity(new Intent(ComapmnySettingAct.this, SavedEventsAct.class));
+        });
+        binding.rlAccod.setOnClickListener(v -> {
+            startActivity(new Intent(ComapmnySettingAct.this, SavedAccommodationAct.class));
         });
 
         binding.RRSignOut.setOnClickListener(v -> {

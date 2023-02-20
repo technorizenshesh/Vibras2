@@ -65,6 +65,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.retrofit.Constant.LATItude;
+import static com.my.vibras.retrofit.Constant.LONGItude;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.USER_TYPE;
 import static com.my.vibras.retrofit.Constant.showToast;
@@ -282,8 +284,10 @@ public class EventsFragment extends Fragment {
             String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
             Map<String, String> map = new HashMap<>();
             map.put("user_id", userId);
-            map.put("lat", session.getHOME_LAT());
-            map.put("lon", session.getHOME_LONG());
+            String lat   = SharedPreferenceUtility.getInstance(getActivity()).getString(LATItude);
+            String lang = SharedPreferenceUtility.getInstance(getActivity()).getString(LONGItude);
+            map.put("lat", lat );
+            map.put("lon", lang);
             Log.e(TAG, "getAccomadtion:   getAccomadtiongetAccomadtiongetAccomadtiongetAccomadtion"+map );
             Call<SuccessAccList> call = apiInterface.getAccomadtion(map);
             call.enqueue(new Callback<SuccessAccList>() {
@@ -395,8 +399,10 @@ public class EventsFragment extends Fragment {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("user_id", userId);
-        map.put("lat", session.getHOME_LAT());
-        map.put("lon", session.getHOME_LONG());
+        String lat   = SharedPreferenceUtility.getInstance(getActivity()).getString(LATItude);
+        String lang = SharedPreferenceUtility.getInstance(getActivity()).getString(LONGItude);
+        map.put("lat", lat );
+        map.put("lon", lang);
         Call<SuccessResGetEvents> call = apiInterface.getEvents(map);
         call.enqueue(new Callback<SuccessResGetEvents>() {
             @Override
@@ -434,8 +440,10 @@ public class EventsFragment extends Fragment {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         Map<String, String> map = new HashMap<>();
         map.put("user_id", userId);
-        map.put("lat", session.getHOME_LAT());
-        map.put("lon", session.getHOME_LONG());
+        String lat   = SharedPreferenceUtility.getInstance(getActivity()).getString(LATItude);
+        String lang = SharedPreferenceUtility.getInstance(getActivity()).getString(LONGItude);
+        map.put("lat", lat );
+        map.put("lon", lang);
         Log.e(TAG, "getRestaurants:   getRestaurnatgetRestaurnatgetRestaurnatgetRestaurnat"+map );
         Call<SuccessResGetRestaurants> call = apiInterface.getRestaurnat(map);
         call.enqueue(new Callback<SuccessResGetRestaurants>() {

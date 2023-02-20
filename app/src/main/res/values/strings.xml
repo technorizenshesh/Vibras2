@@ -207,7 +207,10 @@
     <!--
     <string name="api_key"   translatable="false">AIzaSyCjm3GS5HaNLYXnxqqF_IhsufMpQgcx8T0</string>
 -->
+<!--
     <string name="api_key" translatable="false">AIzaSyCjm3GS5HaNLYXnxqqF_IhsufMpQgcx8T0</string>
+-->
+    <string name="api_key" translatable="false">AIzaSyCfafYXWLedHR9L2hdYg8hFQs_bz1LbDmI</string>
     <string name="facebook_app_id" translatable="false">838895714054178</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
     <string name="facebook_client_token" translatable="false">618483dab13b3748bbe692856f8730ba</string>
@@ -288,5 +291,17 @@
     <string name="msg_reported">Reported Successfully</string>
     <string name="blocked_users">Blocked Users</string>
     <string name="unblocked"> Unblock </string>
+    <string name="no_user_found_near_you_please_try_again_later">No User Found Near You Please try again later !</string>
 
+    <string name="man">Male</string>
+    <string name="woman">Female</string>
+    <string name="other">Both</string>
+    <string name="saved_accomaddtion">Saved Accommodation</string>
+
+    <string-array name="gender_list">
+    <item >@string/man</item>
+    <item >@string/woman</item>
+    <item >@string/other</item>
+
+</string-array>
 </resources>

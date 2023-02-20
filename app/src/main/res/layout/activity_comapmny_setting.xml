@@ -202,6 +202,35 @@
                         android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlAccod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_baseline_hotel"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="@string/saved_accomaddtion"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/RRpayment"

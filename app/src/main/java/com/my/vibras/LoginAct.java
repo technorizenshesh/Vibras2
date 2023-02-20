@@ -1,5 +1,7 @@
 package com.my.vibras;
 
+import static android.content.pm.PackageManager.*;
+
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -34,7 +36,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.my.vibras.Company.HomeComapnyAct;
@@ -49,6 +50,7 @@ import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.BetterActivityResult;
 import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.GPSTracker;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import org.json.JSONException;
@@ -69,9 +71,8 @@ import static com.my.vibras.retrofit.Constant.showToast;
 public class LoginAct extends AppCompatActivity {
     ActivityLoginBinding binding;
     String LoginType;
-    private static final int RC_SIGN_IN = 007;
+    private static final int RC_SIGN_IN = 7;
     private static final String TAG = "LoginAct";
-    private FirebaseAuth mAuth;
     private String strEmail = "", strPassword = "", deviceToken = "";
     private VibrasInterface apiInterface;
     private GoogleSignInClient mGoogleSignInClient;
@@ -80,29 +81,24 @@ public class LoginAct extends AppCompatActivity {
 
     ProgressDialog dialog;
     LoginButton login_button;
-    private CallbackManager callbackManager;
     LoginManager loginManager;
-
+    private String strLat = "", strLng = "";
+    private GPSTracker gpsTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        mAuth = FirebaseAuth.getInstance();
+        gpsTracker = new GPSTracker(this);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         getLocation();
         getToken();
         if (getIntent() != null) {
-            LoginType = getIntent().getStringExtra("loginType").toString();
+            LoginType = getIntent().getStringExtra("loginType");
         }
-        binding.llLogin.setOnClickListener(v -> {
-            startActivity(new Intent(LoginAct.this, SignUpAct.class)
-                    .putExtra("loginType", LoginType));
-        });
+        binding.llLogin.setOnClickListener(v -> startActivity(new Intent(LoginAct.this, SignUpAct.class)
+                .putExtra("loginType", LoginType)));
 
-        binding.txtForogot.setOnClickListener(v -> {
-            startActivity(new Intent(LoginAct.this, ForgetPasswordAct.class).putExtra("loginType", LoginType));
-
-        });
+        binding.txtForogot.setOnClickListener(v -> startActivity(new Intent(LoginAct.this, ForgetPasswordAct.class).putExtra("loginType", LoginType)));
         binding.RLogin.setOnClickListener(v -> {
             strEmail = binding.edtEmail.getText().toString().trim();
             strPassword = binding.edtPassword.getText().toString().trim();
@@ -128,7 +124,7 @@ public class LoginAct extends AppCompatActivity {
 
         loginManager = LoginManager.getInstance();
         loginManager.logOut();
-        callbackManager = CallbackManager.Factory.create();
+        CallbackManager callbackManager = CallbackManager.Factory.create();
         binding.loginButton.setReadPermissions("email", "public_profile");
         login_button = (LoginButton) findViewById(R.id.login_button);
         //  LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
@@ -146,39 +142,28 @@ public class LoginAct extends AppCompatActivity {
             public void onError(FacebookException exception) {
             }
         });
-        binding.fbLoginLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.fbLoginLay.setOnClickListener(v -> {
 
 
-                // hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
-                hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
-                FacebookSdk.sdkInitialize(getApplicationContext());
-                AppEventsLogger.activateApp(getApplication());
-                login_button.performClick();
-            }
+            // hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
+            hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            AppEventsLogger.activateApp(getApplication());
+            login_button.performClick();
         });
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.my.vibras",
-                    PackageManager.GET_SIGNATURES);
+                    GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NameNotFoundException | NoSuchAlgorithmException e) {
 
         }
-
-        // hashFromSHA1("35:FB:D8:73:DB:D9:AA:E4:EB:FC:4A:8A:18:D7:CD:02:7E:EF:3B:25");
-       /* hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(getApplication());*/
-
     }
 
     private void getUserDetails(LoginResult loginResult) {
@@ -263,11 +248,16 @@ public class LoginAct extends AppCompatActivity {
     }
 
     private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(LoginAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(LoginAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(LoginAct.this, Manifest.permission.ACCESS_FINE_LOCATION) != PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(LoginAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(LoginAct.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
                     Constant.LOCATION_REQUEST);
         } else {
+
+            Log.e("Latittude====", gpsTracker.getLatitude() + "");
+            strLat = Double.toString(gpsTracker.getLatitude());
+            strLng = Double.toString(gpsTracker.getLongitude());
+
         }
     }
 
@@ -279,7 +269,8 @@ public class LoginAct extends AppCompatActivity {
             case 1000: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        && grantResults[0] == PERMISSION_GRANTED) {
+                    getLocation();
                 } else {
                     Toast.makeText(LoginAct.this, LoginAct.this.getResources().getString(R.string.permisson_denied), Toast.LENGTH_SHORT).show();
                 }
@@ -301,6 +292,8 @@ public class LoginAct extends AppCompatActivity {
         } else {
             map.put("language", "sp");
         }
+        map.put("lat", strLat);
+        map.put("lon", strLng);
         map.put("email", strEmail);
         map.put("password", strPassword);
         map.put("register_id", deviceToken);

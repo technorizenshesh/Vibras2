@@ -29,6 +29,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.retrofit.Constant.LATItude;
+import static com.my.vibras.retrofit.Constant.LONGItude;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
@@ -63,8 +65,10 @@ public class RestaurantAct extends AppCompatActivity implements PostClickListene
         DataManager.getInstance().showProgressMessage(RestaurantAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
-        map.put("lat","");
-        map.put("lon","");
+        String lat   = SharedPreferenceUtility.getInstance(getApplicationContext()).getString(LATItude);
+        String lang = SharedPreferenceUtility.getInstance(getApplicationContext()).getString(LONGItude);
+        map.put("lat", lat );
+        map.put("lon", lang);
         Call<SuccessResMyRestaurantRes> call = apiInterface.getNearbyRestaurnat(map);
         call.enqueue(new Callback<SuccessResMyRestaurantRes>() {
             @Override

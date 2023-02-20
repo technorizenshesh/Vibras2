@@ -33,6 +33,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.retrofit.Constant.LATItude;
+import static com.my.vibras.retrofit.Constant.LONGItude;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 import static io.agora.rtc.gl.VideoFrame.TextureBuffer.TAG;
@@ -67,8 +69,10 @@ public class AccAct extends AppCompatActivity implements PostClickListener {
         String userId = SharedPreferenceUtility.getInstance(AccAct.this).getString(USER_ID);
         Map<String, String> map = new HashMap<>();
         map.put("user_id", userId);
-        map.put("lat", "");
-        map.put("lon","");
+        String lat   = SharedPreferenceUtility.getInstance(getApplicationContext()).getString(LATItude);
+        String lang = SharedPreferenceUtility.getInstance(getApplicationContext()).getString(LONGItude);
+        map.put("lat", lat );
+        map.put("lon", lang);
         Log.e(TAG, "getRestaurants:   getRestaurnatgetRestaurnatgetRestaurnatgetRestaurnat"+map );
         Call<SuccessAccList> call = apiInterface.getAccomadtion(map);
         call.enqueue(new Callback<SuccessAccList>() {

@@ -408,7 +408,8 @@ public class MyProfileFragment extends Fragment  {
            //     String countryName = addresses.get(0).getAddressLine(2);
 
                 // txt_paddress.setText(address);
-                return cityName+","+stateName ;
+               // return cityName+","+stateName ;
+                return cityName ;
             }
                 //   txt_state.setText(stateName);
 

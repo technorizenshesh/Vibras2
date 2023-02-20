@@ -30,6 +30,7 @@ import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
@@ -178,6 +179,13 @@ binding.contactNo.setText(requestModel.getUserContact());
         DataManager.getInstance().showProgressMessage(AccomdDetailAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("accommodation_id",requestModel.getId());
+        boolean val = SharedPreferenceUtility.getInstance(getApplicationContext())
+                .getBoolean(Constant.SELECTED_LANGUAGE);
+        if (!val) {
+            map.put("language", "en");
+        } else {
+            map.put("language", "sp");
+        }
         Call<AccomadListResSuccess> call = apiInterface.get_accommodation_comment(map);
         call.enqueue(new Callback<AccomadListResSuccess>() {
             @Override
