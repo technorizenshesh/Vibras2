@@ -13,7 +13,6 @@ import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResAddRestaurant;
 import com.my.vibras.model.SuccessResBlockedUser;
-import com.my.vibras.model.SuccessResCatType;
 import com.my.vibras.model.SuccessResDeleteCard;
 import com.my.vibras.model.SuccessResDeleteConversation;
 import com.my.vibras.model.SuccessResFilterData;
@@ -93,8 +92,8 @@ public interface VibrasInterface {
                                           @Query("mobile") String mobile,
                                           @Query("type") String type,
                                           @Query("gender") String gender,
-                                          @Query("time_zone") String time_zone
-            , @Query("social_id") String social_id,
+                                          @Query("time_zone") String time_zone,
+                                          @Query("social_id") String social_id,
                                           @Query("social_type") String social_type,
                                           @Query("register_id") String register_id,
                                           @Query("language") String lang
@@ -128,7 +127,8 @@ public interface VibrasInterface {
     @POST("getPassion")
     Call<SuccessResGetInterest> getPassion(
             @FieldMap Map<String, String> paramHashMap);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST("addPostInterest")
     Call<ResponseBody> setPassion(
             @FieldMap Map<String, String> paramHashMap);
@@ -635,6 +635,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("spam_user")
     Call<ResponseBody> spam_user(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("spam_story")
     Call<ResponseBody> spam_story(@FieldMap Map<String, String> paramHashMap);

@@ -34,7 +34,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
@@ -422,29 +421,21 @@ public class LoginAct extends AppCompatActivity {
 
     private void signOut() {
         mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // ...
-                    }
+                .addOnCompleteListener(this, task -> {
+                    // ...
                 });
     }
 
 
     //**************************GOOGLE Login *********************************************
     private void googleSignIn() {
-//        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-//        startActivityForResult(signInIntent, RC_SIGN_IN);
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        //  startActivityForResult(signInIntent, RC_SIGN_IN);
+     Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         activityLauncher.launch(signInIntent, result -> {
             if (result.getResultCode() == RESULT_OK) {
                 Intent data = result.getData();
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 handleSignInResult(task);
             }
-
-
         });
     }
 

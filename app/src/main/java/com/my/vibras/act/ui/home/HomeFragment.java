@@ -109,15 +109,6 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
             Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_eventsFragment, bundle);
         });
         setAdapter();
-        if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
-            getInterest();
-            getAllUsers();
-        } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
-        }
-
-
-
         boolean val =  SharedPreferenceUtility.getInstance(getActivity()).getBoolean(Constant.SELECTED_LANGUAGE);
 
         String lang = "";
@@ -129,6 +120,8 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
         {
             lang = "sp";
         }
+        updateLocation();
+        getProfile();
         return binding.getRoot();
     }
 
@@ -193,8 +186,13 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
     @Override
     public void onResume() {
         super.onResume();
-        updateLocation();
-        getProfile();
+
+        if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
+            getInterest();
+            getAllUsers();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private SuccessResSignup.Result userDetail;
